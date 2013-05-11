@@ -50,6 +50,7 @@ stat "%buildroot"/$(readlink -f "%buildroot/%_libdir/libunwind.so");
 %postun -p /sbin/ldconfig
 
 %files
+%license COPYING
 %defattr(-, root, root)
 %_libdir/lib*
 %{_libdir}/lib*.so.*
