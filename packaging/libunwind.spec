@@ -12,6 +12,7 @@ Version:        1.1
 Release:        0
 VCS:            profile/base/libunwind#upstream/1.1-0-g0349587-dirty
 Source:         libunwind-%{version}.tar.gz
+Source1001: 	libunwind.manifest
 ExclusiveArch:  %ix86 x86_64 %arm 
 
 %description
@@ -30,6 +31,7 @@ call-chain of a program.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 autoreconf -fi
@@ -50,6 +52,7 @@ stat "%buildroot"/$(readlink -f "%buildroot/%_libdir/libunwind.so");
 %postun -p /sbin/ldconfig
 
 %files
+%manifest %{name}.manifest
 %license COPYING
 %defattr(-, root, root)
 %_libdir/lib*
@@ -57,6 +60,7 @@ stat "%buildroot"/$(readlink -f "%buildroot/%_libdir/libunwind.so");
 %{_libdir}/libunwind.so
 
 %files devel
+%manifest %{name}.manifest
 %defattr(-, root, root)
 %{_prefix}/include/*
 %{_libdir}/lib*.a
