@@ -13,7 +13,7 @@ Release:        0
 VCS:            profile/base/libunwind#upstream/1.1-0-g0349587-dirty
 Source:         libunwind-%{version}.tar.gz
 Source1001: 	libunwind.manifest
-ExclusiveArch:  %ix86 x86_64 %arm 
+ExclusiveArch:  %ix86 x86_64 %arm aarch64
 
 %description
 A portable and efficient C programming interface (API) to determine the
@@ -45,7 +45,7 @@ make %{?_smp_mflags}
 mkdir -p $RPM_BUILD_ROOT/%{_lib}
 ln -sf /%{_libdir}/libunwind.so.8 $RPM_BUILD_ROOT%{_libdir}/libunwind.so
 # Check that ln did not create a dangling link
-stat "%buildroot"/$(readlink -f "%buildroot/%_libdir/libunwind.so");
+stat %{buildroot}/$(readlink -f "%{buildroot}/%{_libdir}/libunwind.so");
 
 %post -p /sbin/ldconfig
 
@@ -69,7 +69,7 @@ stat "%buildroot"/$(readlink -f "%buildroot/%_libdir/libunwind.so");
 %{_libdir}/pkgconfig/libunwind-ptrace.pc
 %{_libdir}/pkgconfig/libunwind-setjmp.pc
 %{_libdir}/pkgconfig/libunwind.pc
-%ifarch %arm %ix86 x86_64
+%ifarch %arm %ix86 x86_64 aarch64
 %{_libdir}/pkgconfig/libunwind-coredump.pc
 %endif
 %doc %{_mandir}/man?/*
