@@ -35,7 +35,7 @@ cp %{SOURCE1001} .
 
 %build
 autoreconf -fi
-export CFLAGS="%optflags -U_FORTIFY_SOURCE"
+export CFLAGS="%optflags -U_FORTIFY_SOURCE -fcommon"
 %configure
 make %{?_smp_mflags}
 
